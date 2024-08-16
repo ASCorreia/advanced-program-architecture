@@ -23,7 +23,6 @@ describe("Concept: For Future Use", () => {
       .accounts({
         owner: wallet.publicKey,
         gameState: gameState.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
       })
       .signers([gameState])
       .rpc()
@@ -41,7 +40,6 @@ describe("Concept: For Future Use", () => {
       .accounts({
         owner: wallet.publicKey,
         gameState: gameState.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
       })
       .signers([gameState])
       .rpc()

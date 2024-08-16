@@ -11,10 +11,9 @@ pub struct ConceptSizes<'info> {
     #[account(
         init,
         payer = owner,
-        space = std::mem::size_of::<DataTypes>() 
+        space = DataTypes::INIT_SPACE 
             + string.len()
             + vector_length as usize
-            + 8
     )]
     pub all_types: Account<'info, DataTypes>,
 
@@ -44,7 +43,11 @@ pub struct DataTypes {
     pub vec: Vec<u8>,                   // 4 + (length of vec * size of u8)
 }
 
-#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
+impl Space for DataTypes {
+    const INIT_SPACE: usize = 8 + 1 + 2 + 4 + 8 + 8 + 16 + 32 + 32 + SomeStruct::INIT_SPACE + (1 + 1) + 64 + 4 + 4;
+}
+
+#[derive(Clone, AnchorSerialize, AnchorDeserialize, InitSpace)]
 pub struct SomeStruct {
     pub bool: bool,                     // 1 byte
     pub sixty_four_bytes: [u8; 64],     // 64 bytes

@@ -63,10 +63,6 @@ describe("Concept: Indexing", () => {
       .accounts({
         owner: wallet.publicKey,
         single: single.publicKey,
-        onePerProgram,
-        onePerOwner,
-        multiplePerOwner,
-        onePerOwnerPerAccount,
         accountToPdaFrom: someAccountToIndexOffOf.publicKey,
       })
       .signers([single, someAccountToIndexOffOf])

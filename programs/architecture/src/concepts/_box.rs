@@ -1,6 +1,7 @@
 use anchor_lang::prelude::*;
 
 #[account]
+#[derive(InitSpace)]
 pub struct SomeBigDataStruct {
     pub big_data: [u8; 2000],
 }
@@ -14,7 +15,7 @@ pub struct ConceptBox<'info> {
     #[account(
         init,
         payer = owner,
-        space = std::mem::size_of::<SomeBigDataStruct>() + 8,
+        space = SomeBigDataStruct::INIT_SPACE + 8,
     )]
     // Without the Box<T> you would have the following error:
     // Stack offset of 4648 exceeded max offset of 4096 by 552 bytes, please minimize large stack variables

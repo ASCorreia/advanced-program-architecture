@@ -19,16 +19,15 @@ pub struct ConceptDataOrder<'info> {
     #[account(
         init,
         payer = owner,
-        space = std::mem::size_of::<GoodGameState>() + 
-        std::mem::size_of::<ExampleInventoryItem>() * max_items as usize + 
-        8,
+        space = GoodGameState::INIT_SPACE + 
+        ExampleInventoryItem::INIT_SPACE * max_items as usize,
     )]
     pub game_state_good: Account<'info, GoodGameState>,
 
     pub system_program: Program<'info, System>,
 }
 
-#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
+#[derive(Clone, AnchorSerialize, AnchorDeserialize, InitSpace)]
 pub struct ExampleInventoryItem {
     pub name: [u8; 32], // Fixed Name up to 32 bytes
     pub amount: u64,
@@ -41,11 +40,19 @@ pub struct BadGameState {
     pub level: u64,
 }
 
+impl Space for BadGameState {
+    const INIT_SPACE: usize = 8 + 4 + 32 + 8;
+}
+
 #[account]
 pub struct GoodGameState {
     pub owner: Pubkey,
     pub level: u64,
     pub items: Vec<ExampleInventoryItem>,
+}
+
+impl Space for GoodGameState {
+    const INIT_SPACE: usize = 8 + 32 + 8 + 4;
 }
 
 pub fn run_concept_data_order(ctx: Context<ConceptDataOrder>, max_items: u8) -> Result<()> {

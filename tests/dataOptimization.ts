@@ -24,7 +24,6 @@ describe("Concept: Data Optimization", () => {
         owner: wallet.publicKey,
         gameFlagsBad: gameFlagsBad.publicKey,
         gameFlagsGood: gameFlagsGood.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
       })
       .signers([gameFlagsBad, gameFlagsGood])
       .rpc()

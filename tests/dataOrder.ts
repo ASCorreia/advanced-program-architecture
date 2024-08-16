@@ -24,7 +24,6 @@ describe("Concept: Data Order", () => {
         owner: wallet.publicKey,
         gameStateBad: gameStateOrderBad.publicKey,
         gameStateGood: gameStateOrderGood.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
       })
       .signers([gameStateOrderBad, gameStateOrderGood])
       .rpc()

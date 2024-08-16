@@ -42,10 +42,6 @@ describe("Concept: Shared Account", () => {
           .conceptSharedAccountBottleneck(amountToDonate)
           .accounts({
             owner: tempPrograms[i].provider.publicKey,
-            donationTally: donationTallyAccount,
-            communityWallet: communityWallet,
-            systemProgram: anchor.web3.SystemProgram.programId,
-            rent: anchor.web3.SYSVAR_RENT_PUBKEY,
           })
           .rpc({
             skipPreflight: true,
@@ -85,9 +81,6 @@ describe("Concept: Shared Account", () => {
           .conceptSharedAccount(amountToDonate)
           .accounts({
             owner: tempPrograms[i].provider.publicKey,
-            donationTally: donationTallyAccount,
-            systemProgram: anchor.web3.SystemProgram.programId,
-            rent: anchor.web3.SYSVAR_RENT_PUBKEY,
           })
           .rpc({
             skipPreflight: true,
@@ -128,9 +121,6 @@ describe("Concept: Shared Account", () => {
           .conceptSharedAccount(amountToDonate)
           .accounts({
             owner: tempPrograms[i].provider.publicKey,
-            donationTally: donationTallyAccount,
-            systemProgram: anchor.web3.SystemProgram.programId,
-            rent: anchor.web3.SYSVAR_RENT_PUBKEY,
           })
           .rpc({
             skipPreflight: true,
@@ -154,8 +144,6 @@ describe("Concept: Shared Account", () => {
           .accounts({
             owner: tempPrograms[i].provider.publicKey,
             donationTally: donationTallyAccount,
-            communityWallet: communityWallet,
-            systemProgram: anchor.web3.SystemProgram.programId,
           })
           .rpc({
             skipPreflight: true,
@@ -216,7 +204,6 @@ async function getTempPrograms(
 
       return new anchor.Program<Architecture>(
         IDL,
-        program.programId,
         tempProvider
       )
     }

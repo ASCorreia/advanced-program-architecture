@@ -29,7 +29,10 @@ pub struct ConceptSharedAccountBottleneck<'info> {
     )]
     pub donation_tally: Account<'info, DonationTally>,
 
-    #[account(mut, address = Pubkey::from_str(STATIC_COMMUNITY_WALLET).unwrap())]
+    #[account(
+        mut, 
+        address = Pubkey::from_str(STATIC_COMMUNITY_WALLET).unwrap()
+    )]
     /// CHECK: This should force the wallet to only be the community wallet
     pub community_wallet: AccountInfo<'info>,
 
@@ -72,7 +75,13 @@ pub fn run_concept_shared_account_bottleneck(ctx: Context<ConceptSharedAccountBo
 #[derive(Accounts)]
 pub struct ConceptSharedAccount<'info> {
 
-    #[account(init_if_needed, seeds=[b"TALLY", owner.key().as_ref()], bump, payer = owner, space= std::mem::size_of::<DonationTally>() + 8 )]
+    #[account(
+        init_if_needed, 
+        seeds=[b"TALLY", owner.key().as_ref()], 
+        bump, 
+        payer = owner, 
+        space= DonationTally::INIT_SPACE + 8 
+    )]
     pub donation_tally: Account<'info, DonationTally>,
 
     #[account(mut)]
@@ -113,7 +122,10 @@ pub struct ConceptSharedAccountRedeem<'info> {
     #[account(mut)]
     pub donation_tally: Account<'info, DonationTally>,
 
-    #[account(mut, address = Pubkey::from_str(STATIC_COMMUNITY_WALLET).unwrap())]
+    #[account(
+        mut, 
+        address = Pubkey::from_str(STATIC_COMMUNITY_WALLET).unwrap()
+    )]
     /// CHECK: This should force the wallet to only be the community wallet
     pub community_wallet: AccountInfo<'info>,
 

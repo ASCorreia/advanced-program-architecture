@@ -28,10 +28,8 @@ describe("Tutorial", () => {
         8, // 8 Items per player
       )
       .accounts({
-        game: gameKey,
         gameMaster: gameMaster.publicKey,
         treasury: treasury.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
       })
       .signers([treasury])
       .rpc();
@@ -59,9 +57,7 @@ describe("Tutorial", () => {
       .createPlayer()
       .accounts({
         game: gameKey,
-        playerAccount: playerKey,
         player: player.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
       })
       .rpc();
 
@@ -94,11 +90,7 @@ describe("Tutorial", () => {
     const txHash = await program.methods
       .spawnMonster()
       .accounts({
-        game: gameKey,
         playerAccount: playerKey,
-        monster: monsterKey,
-        player: player.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
       })
       .rpc();
 
@@ -133,8 +125,6 @@ describe("Tutorial", () => {
       .accounts({
         playerAccount: playerKey,
         monster: monsterKey,
-        player: player.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
       })
       .rpc();
 
@@ -174,7 +164,6 @@ describe("Tutorial", () => {
     )
     const clockworkProgram = new anchor.Program<Architecture>(
         IDL,
-        program.programId,
         clockworkProvider,
     )
 
@@ -190,10 +179,7 @@ describe("Tutorial", () => {
     const txHash = await clockworkProgram.methods
       .depositActionPoints()
       .accounts({
-        game: gameKey,
         player: playerKey,
-        treasury: treasury.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
       })
       .rpc();
 

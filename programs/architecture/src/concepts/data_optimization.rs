@@ -9,14 +9,14 @@ pub struct ConceptDataOptimization<'info> {
     #[account(
         init,
         payer = owner,
-        space = std::mem::size_of::<BadGameFlags>() + 8,
+        space = BadGameFlags::INIT_SPACE + 8,
     )]
     pub game_flags_bad: Account<'info, BadGameFlags>,
 
     #[account(
         init,
         payer = owner,
-        space = std::mem::size_of::<GoodGameFlags>() + 8,
+        space = GoodGameFlags::INIT_SPACE + 8,
     )]
     pub game_flags_good: Account<'info, GoodGameFlags>,
 
@@ -24,6 +24,7 @@ pub struct ConceptDataOptimization<'info> {
 }
 
 #[account]
+#[derive(InitSpace)]
 pub struct BadGameFlags { // 8 bytes
     pub is_frozen: bool,
     pub is_poisoned: bool,
@@ -45,6 +46,7 @@ const IS_FROZEN_FLAG: u8 = 1 << 0;
 // const IS_BLEEDING_FLAG: u8 = 1 << 7;
 const NO_EFFECT_FLAG: u8 = 0b00000000;
 #[account]
+#[derive(InitSpace)]
 pub struct GoodGameFlags { // 1 byte
     pub status_flags: u8, 
 }

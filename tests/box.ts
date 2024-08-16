@@ -20,7 +20,6 @@ describe("Concept: Box", () => {
       .accounts({
         owner: wallet.publicKey,
         someBigData: someBigData.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
       })
       .signers([someBigData])
       .rpc()

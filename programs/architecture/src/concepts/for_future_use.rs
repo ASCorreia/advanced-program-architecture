@@ -9,7 +9,7 @@ pub struct ConceptForFutureUse<'info> {
     #[account(
         init_if_needed,
         payer = owner,
-        space = std::mem::size_of::<GameState>() + 8,
+        space = GameState::INIT_SPACE + 8,
     )]
     pub game_state: Account<'info, GameState>,
 
@@ -18,6 +18,7 @@ pub struct ConceptForFutureUse<'info> {
 
 
 #[account]
+#[derive(InitSpace)]
 pub struct GameState {
     pub health: u64,
     pub mana: u64,

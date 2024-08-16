@@ -22,7 +22,6 @@ describe("Concept: Sizes", () => {
       .accounts({
         owner: wallet.publicKey,
         allTypes: allTypes.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
       })
       .signers([allTypes])
       .rpc()

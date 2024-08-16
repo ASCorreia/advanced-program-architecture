@@ -1,6 +1,7 @@
 use anchor_lang::prelude::*;
 
 #[account]
+#[derive(InitSpace)]
 pub struct SomeIndexingDataStruct {
     pda_type: u8,
     index: Option<u64>,
@@ -13,7 +14,7 @@ pub struct ConceptIndexing<'info> {
     #[account(
         init, 
         payer = owner, 
-        space= std::mem::size_of::<SomeIndexingDataStruct>() + 8 
+        space= SomeIndexingDataStruct::INIT_SPACE + 8 
     )]
     pub single: Account<'info, SomeIndexingDataStruct>,
 
@@ -22,7 +23,7 @@ pub struct ConceptIndexing<'info> {
         seeds=[b"ONE PER PROGRAM"],
         bump,
         payer = owner, 
-        space= std::mem::size_of::<SomeIndexingDataStruct>() + 8 
+        space= SomeIndexingDataStruct::INIT_SPACE + 8 
     )]
     pub one_per_program: Account<'info, SomeIndexingDataStruct>,
 
@@ -31,7 +32,7 @@ pub struct ConceptIndexing<'info> {
         seeds=[b"ONE PER OWNER", owner.key().as_ref()],
         bump,
         payer = owner, 
-        space= std::mem::size_of::<SomeIndexingDataStruct>() + 8 
+        space= SomeIndexingDataStruct::INIT_SPACE + 8 
     )]
     pub one_per_owner: Account<'info, SomeIndexingDataStruct>,
 
@@ -40,7 +41,7 @@ pub struct ConceptIndexing<'info> {
         seeds=[b"MULTIPLE PER OWNER", owner.key().as_ref(), multiple_per_owner_index.to_be_bytes().as_ref()],
         bump,
         payer = owner, 
-        space= std::mem::size_of::<SomeIndexingDataStruct>() + 8 
+        space= SomeIndexingDataStruct::INIT_SPACE + 8 
     )]
     pub multiple_per_owner: Account<'info, SomeIndexingDataStruct>,
 
@@ -49,7 +50,7 @@ pub struct ConceptIndexing<'info> {
         seeds=[b"ONE PER OWNER PER ACCOUNT", owner.key().as_ref(), account_to_pda_from.key().as_ref()],
         bump,
         payer = owner, 
-        space= std::mem::size_of::<SomeIndexingDataStruct>() + 8 
+        space= SomeIndexingDataStruct::INIT_SPACE + 8 
     )]
     pub one_per_owner_per_account: Account<'info, SomeIndexingDataStruct>,
 
