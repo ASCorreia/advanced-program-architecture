@@ -6,6 +6,7 @@ use anchor_lang::{prelude::*, system_program::{Transfer, transfer}};
 pub const STATIC_COMMUNITY_WALLET: &str = "JD5C5Bsp3q9jeC5S57QuSCDDfpeKzXvRkfPB3Td6x3Wh";
 
 #[account]
+#[derive(InitSpace)]
 pub struct DonationTally {
     is_initialized: bool,
     lamports_donated: u64,
@@ -24,7 +25,7 @@ pub struct ConceptSharedAccountBottleneck<'info> {
         ], 
         bump, 
         payer = owner, 
-        space= std::mem::size_of::<DonationTally>() + 8 
+        space = DonationTally::INIT_SPACE + 8 
     )]
     pub donation_tally: Account<'info, DonationTally>,
 
